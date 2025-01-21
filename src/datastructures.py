@@ -28,7 +28,6 @@ class FamilyStructure:
 
     def delete_member(self, id):
         member_to_remove = self.get_member(id)[0]
-        print(member_to_remove)
         self._members.remove(member_to_remove)
 
     def get_member(self, id):
