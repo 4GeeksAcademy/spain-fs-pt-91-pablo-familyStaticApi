@@ -51,13 +51,21 @@ def member(id):
     if not jackson_family.get_member(id):
         response_body['message'] = f'No existe el usuario {id}'
         response_body['results'] = []
-        return response_body, 404
+        return response_body, 400
     if request.method == 'GET':
         response_body['message'] = f'Member con id {id}'
         response_body['results'] = jackson_family.get_member(id)
         return response_body, 200
     if request.method == 'PUT':
+        member_to_update = request.json
+        keys = member_to_update.keys()
+        if 'name' not in keys or 'age' not in keys or 'lucky_numbers' not in keys:
+            response_body['message'] = 'Datos incorrectos'
+            response_body['results'] = []
+            return response_body, 400
+        jackson_family.update_member(member_to_update, id)
         response_body['message'] = f'Member con id {id} actualizado correctamente'
+        response_body['results'] = jackson_family.get_all_members()
         return response_body, 200
     if request.method == 'DELETE':
         jackson_family.delete_member(id)

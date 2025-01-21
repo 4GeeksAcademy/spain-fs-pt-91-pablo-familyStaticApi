@@ -25,6 +25,12 @@ class FamilyStructure:
         member['last_name'] = self.last_name
         self._members.append(member)
         return member
+    
+    def update_member(self, member, id):
+        member_to_update = self.get_member(id)[0]
+        member_to_update['name'] = member['name']
+        member_to_update['age'] = member['age']
+        member_to_update['lucky_numbers'] = member['lucky_numbers']
 
     def delete_member(self, id):
         member_to_remove = self.get_member(id)[0]
